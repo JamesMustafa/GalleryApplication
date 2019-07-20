@@ -1,0 +1,62 @@
+﻿@using GalleryApplication.Services.Models
+@model GalleryApplication.Web.Models.Arts.CreateArtInputModel
+@{
+    ViewData["Title"] = "Create";
+ var categories = this.ViewData["Categories"] as IEnumerable<SelectListItem>;
+ var artists = this.ViewData["Artists"] as IEnumerable<SelectListItem>;
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Images" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtistId" class="control-label"></label>
+                <select asp-for="ArtistId" asp-items="artists" class="form-control"></select>
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload a Image</p>
+                    <input type="file" name="file" accept="image/*" onchange="loadImage(event)" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <img id="output" />
+        </section>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<!--Have to show images better !!!-->

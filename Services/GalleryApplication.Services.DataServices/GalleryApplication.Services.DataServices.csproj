@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj" />
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data.Common\GalleryApplication.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
+  </ItemGroup>
+</Project>

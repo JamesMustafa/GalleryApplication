@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+ <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="AngleSharp" Version="0.12.1" />
+  </ItemGroup>
+
+ <ItemGroup>
+   <None Remove="appsettings.json" />
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="appsettings.json">
+     <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <ProjectReference Include="..\..\Data\GalleryApplication.Data\GalleryApplication.Data.csproj" />
+   <ProjectReference Include="..\..\Services\GalleryApplication.Services.Messaging\GalleryApplication.Services.Messaging.csproj" />
+   <ProjectReference Include="..\..\Web\GalleryApplication.Web\GalleryApplication.Web.csproj" />
+ </ItemGroup>
+</Project>

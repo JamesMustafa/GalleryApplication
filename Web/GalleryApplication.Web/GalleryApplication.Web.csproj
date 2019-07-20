@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-GalleryApplication.Web-A0D7319B-6F61-4D80-BA43-5E2E4C435B95</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data\GalleryApplication.Data.csproj" />
+    <ProjectReference Include="..\..\Services\GalleryApplication.Services.Messaging\GalleryApplication.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data.Common\GalleryApplication.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Services\GalleryApplication.Services.DataServices\GalleryApplication.Services.DataServices.csproj" />
+    <ProjectReference Include="..\..\Services\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Areas\Identity\IdentityHostingStartup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="Views\Images\" />
+    <Folder Include="Models\Arts\" />
+  </ItemGroup>
+</Project>
