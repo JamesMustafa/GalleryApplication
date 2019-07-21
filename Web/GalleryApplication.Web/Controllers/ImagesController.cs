@@ -73,7 +73,7 @@ namespace GalleryApplication.Web.Controllers
                     //stored at the file location
                     var newFileName = art.ToString() + fi.Extension;
                     var webPath = enviroment.WebRootPath;
-                    var path = Path.Combine("", webPath + @"/images/" + newFileName);
+                    var path = Path.Combine("", webPath + @"/images/arts/" + newFileName);
 
                     //IMPORTANT: the pathToSave variable will be save on the column in the database
                     //var pathToSave = @"/images/" + newFileName;
@@ -88,7 +88,7 @@ namespace GalleryApplication.Web.Controllers
 
                 }
             }
-            return View(arts);
+            return RedirectToAction("Index","Home");
         }
     }
 }
