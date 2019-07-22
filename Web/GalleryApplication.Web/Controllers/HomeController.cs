@@ -19,8 +19,7 @@ namespace GalleryApplication.Web.Controllers
         }
         public IActionResult Index()
         {
-            var art = this.artsService.GetOneRandomArt();
-            return View(art);
+            return View();
         }
 
         public IActionResult Privacy()

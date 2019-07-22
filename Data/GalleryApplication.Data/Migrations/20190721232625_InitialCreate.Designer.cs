@@ -3,14 +3,16 @@ using System;
 using GalleryApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GalleryApplication.Data.Migrations
 {
     [DbContext(typeof(GalleryAppContext))]
-    partial class GalleryAppContextModelSnapshot : ModelSnapshot
+    [Migration("20190721232625_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +44,8 @@ namespace GalleryApplication.Data.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("Path");
+
                     b.Property<string>("Title");
 
                     b.Property<DateTime>("UploadedOn");
@@ -59,6 +63,8 @@ namespace GalleryApplication.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 

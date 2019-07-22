@@ -1,12 +1,9 @@
-﻿@model GalleryApplication.Services.Models.Home.IndexArtsViewModel
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
-    var randomId = Model.Id.ToString();
-    var fullPath = "images/arts/" + @randomId + ".jpg";
 }
 
 <!-- Header -->
-<header class="masthead" style="background-image:url(@fullPath)">
+<header class="masthead" style="background-image:url(images/background.jpg)">
     <div class="intro-text">
         <div class="intro-lead-in">Welcome To Our Studio!</div>
         <div class="intro-heading text-uppercase">It's Nice To Meet You</div>

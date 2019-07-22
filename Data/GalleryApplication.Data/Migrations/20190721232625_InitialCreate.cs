@@ -67,7 +67,8 @@ namespace GalleryApplication.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,6 +209,7 @@ namespace GalleryApplication.Data.Migrations
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     UploadedOn = table.Column<DateTime>(nullable: false),
+                    Path = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false),
                     ArtistId = table.Column<int>(nullable: false)
                 },
