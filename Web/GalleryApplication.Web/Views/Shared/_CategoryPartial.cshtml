@@ -1,0 +1,31 @@
+﻿@{
+    var categories = this.ViewData["Categories"] as IEnumerable<SelectListItem>;
+    var artists = this.ViewData["Artists"] as IEnumerable<SelectListItem>;
+}
+
+<li class="nav-item">
+    <div class="dropdown">
+        <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">
+            Categories
+        </a>
+        <div class="dropdown-menu">
+            @foreach (var category in categories)
+            {
+                <a class="dropdown-item" asp-action="Details" asp-controller="Category" asp-route-id="@category.Value">@category.Text</a>
+            }
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <div class="dropdown">
+        <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown">
+            Artists
+        </a>
+        <div class="dropdown-menu">
+            @foreach (var artist in artists)
+            {
+                <a class="dropdown-item" asp-action="Details" asp-controller="Authors" asp-route-id="@artist.Value">@artist.Text</a>
+            }
+        </div>
+    </div>
+</li>

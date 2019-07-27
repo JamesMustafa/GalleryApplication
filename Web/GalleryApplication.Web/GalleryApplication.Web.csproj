@@ -30,5 +30,9 @@
     <Folder Include="Views\Images\" />
     <Folder Include="Models\Arts\" />
     <Folder Include="wwwroot\images\arts\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Authors\" />
+    <Folder Include="wwwroot\images\artists\" />
+    <Folder Include="Models\Quotes\" />
   </ItemGroup>
 </Project>

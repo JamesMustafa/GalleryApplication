@@ -9,5 +9,6 @@
     <Folder Include="Arts\" />
     <Folder Include="Artist\" />
     <Folder Include="Quotes\" />
+    <Folder Include="Category\" />
   </ItemGroup>
 </Project>

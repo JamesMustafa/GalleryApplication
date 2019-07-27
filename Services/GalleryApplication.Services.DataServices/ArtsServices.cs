@@ -21,7 +21,8 @@ namespace GalleryApplication.Services.DataServices
             this.categoriesRepository = categoriesRepository;
         }
 
-        public async Task<Guid> CreateAsync(Arts arts,DateTime uploadedOn)
+        public async Task<Guid> CreateAsync(Arts arts,
+            DateTime uploadedOn,string extension)
         {
             var art = new Arts
             {
@@ -29,7 +30,8 @@ namespace GalleryApplication.Services.DataServices
                 Description = arts.Description,
                 UploadedOn = uploadedOn,
                 CategoryId = arts.CategoryId,
-                ArtistId = arts.ArtistId
+                ArtistId = arts.ArtistId,
+                Path = extension
             };
 
             await this.artsRepository.AddAsync(art);
@@ -43,10 +45,16 @@ namespace GalleryApplication.Services.DataServices
             var art = this.artsRepository.All().Where(x => x.Id == id)
                 .Select(x => new ArtDetailsViewModel
                 {
+                    Id = x.Id,
                     Title = x.Title,
+                    Path = x.Path,
                     Description = x.Description,
                     CategoryName = x.Category.Name,
-                    ArtistName = x.Artist.Name
+                    CategoryId = x.Category.Id,
+                    ArtistName = x.Artist.Name,
+                    ArtistId = x.Artist.Id,
+                    UploadedOn = x.UploadedOn
+
                 }).FirstOrDefault();
 
             return art;

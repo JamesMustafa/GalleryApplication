@@ -15,7 +15,7 @@ namespace GalleryApplication.Services.DataServices
 
         int GetCount();
 
-        Task<Guid> CreateAsync(Arts arts,DateTime uploadedOn);
+        Task<Guid> CreateAsync(Arts arts,DateTime uploadedOn,string extension);
 
         ArtDetailsViewModel GetArtByid(Guid id);
     }

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GalleryApplication.Data.Common;
+using Microsoft.AspNetCore.Http;
 
 namespace ConsoleTester
 {
@@ -34,9 +35,8 @@ namespace ConsoleTester
         {
             //var dbContext = serviceProvider.GetService<TestMvcDbContext>();
             // TODO : Writing tests here
-            var a = Environment.GetEnvironmentVariable("testKey2",EnvironmentVariableTarget.Process);
-            Console.WriteLine(a);
-
+            var pablo = "Pablo Picasso";
+            Console.WriteLine(pablo.Replace(" ",string.Empty).ToLower());
         }
 
         private static void ConfigureServices(ServiceCollection serviceCollection)

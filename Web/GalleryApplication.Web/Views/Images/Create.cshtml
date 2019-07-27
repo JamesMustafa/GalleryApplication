@@ -1,11 +1,9 @@
-﻿@using GalleryApplication.Services.Models
-@model GalleryApplication.Web.Models.Arts.CreateArtInputModel
+﻿@model GalleryApplication.Web.Models.Arts.CreateArtInputModel
 @{
     ViewData["Title"] = "Create";
  var categories = this.ViewData["Categories"] as IEnumerable<SelectListItem>;
  var artists = this.ViewData["Artists"] as IEnumerable<SelectListItem>;
 }
-
 <h1>Create</h1>
 
 <h4>Product</h4>

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GalleryApplication.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pomelo.EntityFrameworkCore.MySql;
@@ -54,6 +53,7 @@ namespace GalleryApplication.Web
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
             })
+                .AddRoles<IdentityRole>() //
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<GalleryAppContext>();
 
@@ -78,6 +78,13 @@ namespace GalleryApplication.Web
             services.AddScoped<ICategoriesService, CategoriesService>();
             services.AddScoped<IArtsService, ArtsServices>();
             services.AddScoped<IArtistService, ArtistService>();
+            services.AddScoped<IQuotesService, QuotesService>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole",
+                    policy => policy.RequireRole("Administrator"));
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

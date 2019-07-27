@@ -16,7 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GalleryApplication.Web.Controllers
 {
-    public class ImagesController : Controller
+    [Authorize]
+    public class ImagesController : BaseController
     {
         private readonly IFileProvider fileProvider;
         private readonly IHostingEnvironment enviroment;
@@ -27,7 +28,7 @@ namespace GalleryApplication.Web.Controllers
         public ImagesController(IFileProvider fileProvider, IHostingEnvironment enviroment,
             ICategoriesService categoriesService,
             IArtistService artistService,
-            IArtsService artsService)
+            IArtsService artsService) : base(categoriesService,artistService)
         {
             this.fileProvider = fileProvider;
             this.enviroment = enviroment;
@@ -36,26 +37,14 @@ namespace GalleryApplication.Web.Controllers
             this.artsService = artsService;
         }
 
-        // GET: Products/Create
+        //[HttpGet]
+        //[Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult Create()
         {
-            this.ViewData["Categories"] = this.categoriesService.GetAll()
-                .Select(x => new SelectListItem
-                {
-                    Value = x.Id.ToString(),
-                    Text = x.Name
-                });
-            this.ViewData["Artists"] = this.artistService.GetAll()
-                .Select(x => new SelectListItem
-                {
-                    Value = x.Id.ToString(),
-                    Text = x.Name
-                });
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind("Title,Description,UploadedOn,CategoryId,ArtistId")] Arts arts, IFormFile file)
@@ -64,10 +53,10 @@ namespace GalleryApplication.Web.Controllers
             {
                 if(file != null && file.Length != 0)
                 {
-                     var art = await artsService.CreateAsync(arts,DateTime.Now);
-
                     //Create a File Info
                     FileInfo fi = new FileInfo(file.FileName);
+
+                    var art = await artsService.CreateAsync(arts,DateTime.Now,fi.Extension);
 
                     //This code creates a unique file name to prevent duplications
                     //stored at the file location
@@ -84,11 +73,15 @@ namespace GalleryApplication.Web.Controllers
                         await file.CopyToAsync(stream);
                     }
 
-                    //This save the path to the record
-
                 }
             }
             return RedirectToAction("Index","Home");
+        }
+
+        public IActionResult Details(Guid Id)
+        {
+            var art = this.artsService.GetArtByid(Id);
+            return View(art);
         }
     }
 }

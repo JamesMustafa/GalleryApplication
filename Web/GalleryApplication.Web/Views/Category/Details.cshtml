@@ -1,0 +1,33 @@
+﻿@model GalleryApplication.Services.Models.Category.CategoryDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<header class="jumbotron my-4">
+    <h2 class="display-3">@Model.Name</h2>
+    <p class="lead">@Model.Description</p>
+</header>
+
+<!-- Page Features -->
+<div class="row text-center">
+    @foreach (var art in Model.Arts)
+    {
+        var path = @"/images/arts/" + art.Id.ToString() + art.Path;
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="@path" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">@art.Title</h4>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-primary" asp-action="Details" asp-controller="Images" asp-route-id="@art.Id">Find Out More!</a>
+                </div>
+            </div>
+        </div>
+    }  
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home">Back to Index</a>
+</div>
