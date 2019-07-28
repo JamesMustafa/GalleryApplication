@@ -8,5 +8,6 @@
     <ProjectReference Include="..\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj" />
     <ProjectReference Include="..\..\Data\GalleryApplication.Data.Common\GalleryApplication.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data\GalleryApplication.Data.csproj" />
   </ItemGroup>
 </Project>

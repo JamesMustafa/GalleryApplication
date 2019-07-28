@@ -35,7 +35,7 @@ namespace GalleryApplication.Services.DataServices
             };
 
             await this.artsRepository.AddAsync(art);
-            await this.artsRepository.SaveChangesAsync();
+            //await this.artsRepository.SaveChangesAsync();
 
             return art.Id;
         }
@@ -63,20 +63,6 @@ namespace GalleryApplication.Services.DataServices
         public int GetCount()
         {
             return this.artsRepository.All().Count();
-        }
-
-        public IndexArtsViewModel GetOneRandomArt()
-        {
-            var art = this.artsRepository.All()
-                .OrderByDescending(x => x.Title) //OrderBy(x => Guid.NewGuid())
-                .Select(x => new IndexArtsViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    CategoryName = x.Category.Name,
-                }).FirstOrDefault();
-
-            return art;
         }
 
         public IEnumerable<IndexArtsViewModel> GetRandomArts(int count)

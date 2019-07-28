@@ -9,8 +9,6 @@ namespace GalleryApplication.Services.DataServices
 {
     public interface IArtsService
     {
-        IndexArtsViewModel GetOneRandomArt();
-
         IEnumerable<IndexArtsViewModel> GetRandomArts(int count);
 
         int GetCount();

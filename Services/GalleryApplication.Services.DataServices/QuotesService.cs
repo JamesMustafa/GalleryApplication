@@ -26,7 +26,7 @@ namespace GalleryApplication.Services.DataServices
             };
 
             await this.quotesRepository.AddAsync(quote);
-            await this.quotesRepository.SaveChangesAsync();
+            //await this.quotesRepository.SaveChangesAsync();
 
             return quote.Id;
 

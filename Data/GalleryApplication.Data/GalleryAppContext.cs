@@ -20,6 +20,7 @@ namespace GalleryApplication.Data
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Arts> Arts { get; set; }
         public DbSet<Quotes> Quotes { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
