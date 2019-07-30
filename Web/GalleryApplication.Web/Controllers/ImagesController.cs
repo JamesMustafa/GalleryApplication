@@ -78,9 +78,10 @@ namespace GalleryApplication.Web.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        public IActionResult Details(Guid Id)
+        public async Task<IActionResult> Details(Guid Id)
         {
-            var art = this.artsService.GetArtByid(Id);
+            var art = await this.artsService.GetArtByIdAsync(Id);
+
             return View(art);
         }
     }

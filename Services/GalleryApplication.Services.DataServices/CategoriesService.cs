@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
+using GalleryApplication.Data.Repositories;
 using GalleryApplication.Services.Models;
 using GalleryApplication.Services.Models.Category;
 using GalleryApplication.Services.Models.Home;
@@ -11,14 +13,38 @@ namespace GalleryApplication.Services.DataServices
 {
     public class CategoriesService : ICategoriesService
     {
-        private readonly IRepository<Category> categoryRepository;
-        private readonly IRepository<Arts> artsRepository;
+        private readonly ICategoryRepository categoryRepository;
+        private readonly IArtRepository artsRepository;
 
-        public CategoriesService(IRepository<Category> categoryRepository
-            ,IRepository<Arts> artsRepository)
+        public CategoriesService(ICategoryRepository categoryRepository
+            ,IArtRepository artsRepository)
         {
             this.categoryRepository = categoryRepository;
             this.artsRepository = artsRepository;
+        }
+
+        public async Task<CategoryDetailsViewModel> GetCategoryByIdAsync(int id)
+        {
+            var arts = await this.artsRepository.GetArtsByCategoryIdAsync(id);
+
+                var categoryArts =arts.Select(x => new IndexArtsViewModel
+                {
+                    Id = x.Id,
+                    Path = x.Path,
+                    Title = x.Title,
+                    CategoryName = x.Category.Name
+                }).ToList();
+
+            var category = await this.categoryRepository.GetCategoryByIdAsync(id);
+
+            var details = new CategoryDetailsViewModel
+            {
+                Name = category.Name,
+                Description = category.Description,
+                Arts = categoryArts
+            };
+
+            return details;
         }
 
         public IEnumerable<IdAndNameViewModel> GetAll()
@@ -29,37 +55,14 @@ namespace GalleryApplication.Services.DataServices
                 {
                     Id = x.Id,
                     Name = x.Name
-                }).ToList(); //should put something in this
+                }).ToList();
 
             return categories;
         }
 
-        public CategoryDetailsViewModel GetCategoryById(int id)
-        {
-            var allCategoryArts = this.artsRepository.All()
-                .Where(x => x.CategoryId == id)
-                .Select(x => new IndexArtsViewModel
-                {
-                    Id = x.Id,
-                    Path = x.Path,
-                    Title = x.Title,
-                    CategoryName = x.Category.Name
-                }).ToList();
-
-            var category = this.categoryRepository.All().Where(x => x.Id == id)
-                .Select(x => new CategoryDetailsViewModel
-                {
-                    Name = x.Name,
-                    Description = x.Description,
-                    Arts = allCategoryArts
-                }).FirstOrDefault();
-
-            return category;
-        }
-
         public bool IsCategoryIdValid(int categoryId)
         {
-            return this.categoryRepository.All().Any(x => x.Id == categoryId);
+            return this.categoryRepository.IsCategoryIdValid(categoryId);
         }
     }
 }

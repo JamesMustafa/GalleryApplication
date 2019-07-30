@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
 
@@ -7,10 +8,11 @@ namespace GalleryApplication.Data.Repositories
 {
     public interface IArtRepository : IRepository<Arts>
     {
-        IEnumerable<Arts> GetRandomArts(int count);
+        Task<IEnumerable<Arts>> GetRandomArtsAsync(int count);
 
-        IEnumerable<Arts> GetArtsByCategoryId(int id);
+        Task<IEnumerable<Arts>> GetArtsByCategoryIdAsync(int categoryId);
+        Task<IEnumerable<Arts>> GetArtsByArtistIdAsync(int artistId);
 
-        Arts GetArtByid(Guid id);
+        Task<Arts> GetArtByIdAsync(Guid id);
     }
 }

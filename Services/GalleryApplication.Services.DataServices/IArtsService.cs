@@ -9,12 +9,12 @@ namespace GalleryApplication.Services.DataServices
 {
     public interface IArtsService
     {
-        IEnumerable<IndexArtsViewModel> GetRandomArts(int count);
+        Task<IEnumerable<IndexArtsViewModel>> GetRandomArtsAsync(int count);
 
         int GetCount();
 
         Task<Guid> CreateAsync(Arts arts,DateTime uploadedOn,string extension);
 
-        ArtDetailsViewModel GetArtByid(Guid id);
+        Task<ArtDetailsViewModel> GetArtByIdAsync(Guid id);
     }
 }

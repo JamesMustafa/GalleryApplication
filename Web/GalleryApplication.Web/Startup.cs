@@ -20,6 +20,7 @@ using GalleryApplication.Data.Common;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using GalleryApplication.Services.DataServices;
+using GalleryApplication.Data.Repositories;
 
 namespace GalleryApplication.Web
 {
@@ -79,6 +80,13 @@ namespace GalleryApplication.Web
             services.AddScoped<IArtsService, ArtsServices>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IQuotesService, QuotesService>();
+
+
+            services.AddScoped<IArtRepository, ArtRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IArtistRepository, ArtistRepository>();
+            services.AddScoped<IQuotesRepository, QuotesRepository>();
 
             services.AddAuthorization(options =>
             {

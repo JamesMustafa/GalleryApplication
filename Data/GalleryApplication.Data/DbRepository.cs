@@ -17,24 +17,34 @@ namespace GalleryApplication.Data
             this.context = context;
         }
 
-        public Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
-            return this.context.Set<TEntity>().AddAsync(entity);
+            await this.context.Set<TEntity>().AddAsync(entity);
+            await context.SaveChangesAsync();
+
+            return entity;
+        }
+
+        public virtual async Task<TEntity> GetByIdAsync<T>(T id)
+        {
+            return await context.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task UpdateAsync(TEntity entity)
+        {
+            this.context.Entry(entity).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(TEntity entity)
+        {
+            this.context.Set<TEntity>().Remove(entity);
+            await context.SaveChangesAsync();
         }
 
         public IEnumerable<TEntity> All()
         {
             return this.context.Set<TEntity>().ToList();
-        }
-
-        public void Delete(TEntity entity)
-        {
-            this.context.Set<TEntity>().Remove(entity);
-        }
-
-        public TEntity Get<T>(T id)
-        {
-            return context.Set<TEntity>().Find(id);
         }
     }
 }

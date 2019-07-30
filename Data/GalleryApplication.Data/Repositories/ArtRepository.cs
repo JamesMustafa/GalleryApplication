@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
@@ -12,27 +13,38 @@ namespace GalleryApplication.Data.Repositories
         {
         }
 
-        public Arts GetArtByid(Guid id)
+        public async Task<Arts> GetArtByIdAsync(Guid id)
         {
-            return this.Get(id);
+            var art = await this.GetByIdAsync(id);
+
+            return await Task.FromResult(art);
         }
 
-        public IEnumerable<Arts> GetArtsByCategoryId(int id)
+        public async Task<IEnumerable<Arts>> GetArtsByArtistIdAsync(int artistId)
         {
             var arts = this.All()
-                .Where(x => x.CategoryId == id)
+                .Where(x => x.ArtistId == artistId)
                 .ToList();
 
-            return arts;
+            return await Task.FromResult<IEnumerable<Arts>>(arts);
         }
 
-        public IEnumerable<Arts> GetRandomArts(int count)
+        public async Task<IEnumerable<Arts>> GetArtsByCategoryIdAsync(int categoryId)
+        {
+            var arts = this.All()
+                .Where(x => x.CategoryId == categoryId)
+                .ToList();
+
+            return await Task.FromResult<IEnumerable<Arts>>(arts);
+        }
+
+        public async Task<IEnumerable<Arts>> GetRandomArtsAsync(int count)
         {
             var arts = this.All()
                 .OrderBy(x => Guid.NewGuid())
                 .Take(count).ToList();
 
-            return arts;
+            return await Task.FromResult<IEnumerable<Arts>>(arts);
         }
     }
 }

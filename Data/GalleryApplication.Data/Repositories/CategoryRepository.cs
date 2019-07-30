@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
@@ -11,9 +12,10 @@ namespace GalleryApplication.Data.Repositories
         {
         }
 
-        public Category GetCategoryById(int id)
+        public async Task<Category> GetCategoryByIdAsync(int categoryId)
         {
-            return this.Get(id);
+            var category = await this.GetByIdAsync(categoryId);
+            return category;
         }
 
         public bool IsCategoryIdValid(int categoryId)

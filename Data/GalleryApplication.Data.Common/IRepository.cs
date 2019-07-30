@@ -7,13 +7,13 @@ namespace GalleryApplication.Data.Common
 {
     public interface IRepository<TEntity>
         where TEntity : class
-    {
-        TEntity Get<T>(T id);
+    { 
+        Task<TEntity> GetByIdAsync<T>(T id);
         IEnumerable<TEntity> All();
 
-        Task AddAsync(TEntity entity);
-
-        void Delete(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity);
 
     }
 }

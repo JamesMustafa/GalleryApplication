@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GalleryApplication.Services.Models;
 using GalleryApplication.Services.Models.Category;
 
@@ -11,6 +12,6 @@ namespace GalleryApplication.Services.DataServices
 
         bool IsCategoryIdValid(int categoryId);
 
-        CategoryDetailsViewModel GetCategoryById(int id);
+        Task<CategoryDetailsViewModel> GetCategoryByIdAsync(int id);
     }
 }

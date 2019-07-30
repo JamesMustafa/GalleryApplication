@@ -26,9 +26,9 @@ namespace GalleryApplication.Web.Controllers
 
         [Authorize]
         [Route("/Category/Details/{id:int}")]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var category = this.categoriesService.GetCategoryById(id);
+            var category = await this.categoriesService.GetCategoryByIdAsync(id);
             return this.View(category);
         }
 

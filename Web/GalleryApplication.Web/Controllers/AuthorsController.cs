@@ -27,9 +27,9 @@ namespace GalleryApplication.Web.Controllers
 
         [Authorize]
         [Route("/Authors/Details/{id:int}")]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var artist = this.artistService.GetArtistByid(id);
+            var artist = await this.artistService.GetArtistByIdAsync(id);
             return this.View(artist);
         }
 

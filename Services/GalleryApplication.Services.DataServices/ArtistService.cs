@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
+using GalleryApplication.Data.Repositories;
 using GalleryApplication.Services.Models;
 using GalleryApplication.Services.Models.Artist;
 using GalleryApplication.Services.Models.Home;
@@ -12,20 +14,20 @@ namespace GalleryApplication.Services.DataServices
 {
     public class ArtistService : IArtistService
     {
-        private readonly IRepository<Arts> artsRepository;
-        private readonly IRepository<Artist> artistRepository;
-        private readonly IRepository<Quotes> quotesRepository;
+        private readonly IArtRepository artsRepository;
+        private readonly IArtistRepository artistRepository;
+        private readonly IQuotesRepository quotesRepository;
 
-        public ArtistService(IRepository<Artist> artistRepository,
-            IRepository<Quotes> quotesRepository,
-            IRepository<Arts> artsRepository)
+        public ArtistService(IArtistRepository artistRepository,
+            IQuotesRepository quotesRepository,
+            IArtRepository artsRepository)
         {
             this.artistRepository = artistRepository;
             this.quotesRepository = quotesRepository;
             this.artsRepository = artsRepository;
         }
 
-        public IEnumerable<IdAndNameViewModel> GetAll()
+        public IEnumerable<IdAndNameViewModel> GetAll() //should make async too
         {
             var artists = this.artistRepository.All()
                 .OrderBy(x => x.Name)
@@ -38,42 +40,43 @@ namespace GalleryApplication.Services.DataServices
             return artists;
         }
 
-        public ArtistDetailsViewModel GetArtistByid(int id)
+        public async Task<ArtistDetailsViewModel> GetArtistByIdAsync(int id)
         {
-            var arts = this.artsRepository.All().Where(x => x.ArtistId == id)
-                .Select(x => new IndexArtsViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Path = x.Path,
-                    CategoryName = x.Category.Name
-                    
-                }).ToList();
+            var arts = await this.artsRepository.GetArtsByArtistIdAsync(id);
 
-            var quotes = this.quotesRepository.All().Where(x => x.ArtistId == id)
-                .Select(x => new ArtistQuotesViewModel
-                {
-                    Id = x.Id,
-                    Content = x.Content,
-                    ArtistName = x.Artist.Name
-                }).ToList();
+            var artistArts = arts.Select(x => new IndexArtsViewModel
+            {
+                Id = x.Id,
+                Path = x.Path,
+                Title = x.Title,
+                CategoryName = x.Category.Name
 
-            var artist = this.artistRepository.All().Where(x => x.Id == id)
-                .Select(x => new ArtistDetailsViewModel
-                {
-                    Name = x.Name,
-                    ShortBiography = x.shortBiography,
-                    Quotes = quotes,
-                    Arts = arts
+            }).ToList();
 
-                }).FirstOrDefault();
+            var quotes = this.quotesRepository.GetQuotesByArtistId(id);
+            var artistQuotes = quotes.Select(x => new ArtistQuotesViewModel
+            {
+                Id = x.Id,
+                Content = x.Content,
+                ArtistName = x.Artist.Name
+            }).ToList();
 
-            return artist;
+            var artist = await this.artistRepository.GetArtistByIdAsync(id);
+
+            var details = new ArtistDetailsViewModel
+            {
+                Name = artist.Name,
+                ShortBiography = artist.shortBiography,
+                Arts = artistArts,
+                Quotes = artistQuotes
+            };
+
+            return details;
         }
 
         public bool IsArtistIdValid(int artistId)
         {
-            return this.artistRepository.All().Any(x => x.Id == artistId);
+            return this.artistRepository.IsArtistIdValid(artistId);
         }
     }
 }

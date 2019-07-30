@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
 
@@ -8,6 +9,6 @@ namespace GalleryApplication.Data.Repositories
     {
         bool IsCategoryIdValid(int categoryId);
 
-        Category GetCategoryById(int id);
+        Task<Category> GetCategoryByIdAsync(int categoryId);
     }
 }

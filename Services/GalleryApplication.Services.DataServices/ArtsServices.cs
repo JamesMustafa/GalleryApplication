@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
+using GalleryApplication.Data.Repositories;
 using GalleryApplication.Services.Models.Arts;
 using GalleryApplication.Services.Models.Home;
 
@@ -11,14 +12,11 @@ namespace GalleryApplication.Services.DataServices
 {
     public class ArtsServices : IArtsService
     {
-        private readonly IRepository<Arts> artsRepository;
-        private readonly IRepository<Category> categoriesRepository;
+        private readonly IArtRepository artsRepository;
 
-        public ArtsServices(IRepository<Arts> artsRepository,
-            IRepository<Category> categoriesRepository)
+        public ArtsServices(IArtRepository artsRepository)
         {
             this.artsRepository = artsRepository;
-            this.categoriesRepository = categoriesRepository;
         }
 
         public async Task<Guid> CreateAsync(Arts arts,
@@ -35,29 +33,28 @@ namespace GalleryApplication.Services.DataServices
             };
 
             await this.artsRepository.AddAsync(art);
-            //await this.artsRepository.SaveChangesAsync();
 
             return art.Id;
         }
 
-        public ArtDetailsViewModel GetArtByid(Guid id)
+        public async Task<ArtDetailsViewModel> GetArtByIdAsync(Guid id)
         {
-            var art = this.artsRepository.All().Where(x => x.Id == id)
-                .Select(x => new ArtDetailsViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Path = x.Path,
-                    Description = x.Description,
-                    CategoryName = x.Category.Name,
-                    CategoryId = x.Category.Id,
-                    ArtistName = x.Artist.Name,
-                    ArtistId = x.Artist.Id,
-                    UploadedOn = x.UploadedOn
+            var art = await this.artsRepository.GetArtByIdAsync(id);
 
-                }).FirstOrDefault();
+            var details = new ArtDetailsViewModel
+            {
+                Id = art.Id,
+                Title = art.Title,
+                Path = art.Path,
+                Description = art.Description,
+                CategoryName = art.Category.Name,
+                CategoryId = art.Category.Id,
+                ArtistName = art.Artist.Name,
+                ArtistId = art.Artist.Id,
+                UploadedOn = art.UploadedOn
+            };
 
-            return art;
+            return details;
         }
 
         public int GetCount()
@@ -65,16 +62,18 @@ namespace GalleryApplication.Services.DataServices
             return this.artsRepository.All().Count();
         }
 
-        public IEnumerable<IndexArtsViewModel> GetRandomArts(int count)
+        public async Task<IEnumerable<IndexArtsViewModel>> GetRandomArtsAsync(int count)
         {
-            var arts = this.artsRepository.All()
-                .OrderBy(x => Guid.NewGuid())
-                .Select(x => new IndexArtsViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    CategoryName = x.Category.Name,
-                }).Take(count).ToList();
+            var oldArts = await this.artsRepository.GetRandomArtsAsync(count);
+
+            var arts = oldArts
+              .OrderBy(x => Guid.NewGuid())
+              .Select(x => new IndexArtsViewModel
+              {
+                  Id = x.Id,
+                  Title = x.Title,
+                  CategoryName = x.Category.Name,
+              });
 
             return arts;
         }
