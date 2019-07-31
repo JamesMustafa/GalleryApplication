@@ -6,7 +6,7 @@ using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
 using GalleryApplication.Data.Repositories;
 using GalleryApplication.Services.Models;
-using GalleryApplication.Services.Models.Category;
+using GalleryApplication.Services.Models.Categories;
 using GalleryApplication.Services.Models.Home;
 
 namespace GalleryApplication.Services.DataServices

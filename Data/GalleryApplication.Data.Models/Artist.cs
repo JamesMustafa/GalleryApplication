@@ -8,6 +8,6 @@ namespace GalleryApplication.Data.Models
     {
         public string Name { get; set; }
         public string shortBiography { get; set; }
-        public IEnumerable<Quotes> Quotes { get; set; }
+        public IEnumerable<Quote> Quotes { get; set; }
     }
 }

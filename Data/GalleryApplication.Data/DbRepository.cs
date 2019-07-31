@@ -12,6 +12,7 @@ namespace GalleryApplication.Data
     {
         private readonly GalleryAppContext context;
 
+
         public DbRepository(GalleryAppContext context)
         {
             this.context = context;
@@ -42,7 +43,11 @@ namespace GalleryApplication.Data
             await context.SaveChangesAsync();
         }
 
-        public IEnumerable<TEntity> All()
+        public IQueryable<TEntity> All()
+        {
+            return this.context.Set<TEntity>();
+        }
+        public IEnumerable<TEntity> AllEnum()
         {
             return this.context.Set<TEntity>().ToList();
         }

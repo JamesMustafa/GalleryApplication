@@ -10,16 +10,16 @@ namespace GalleryApplication.Services.DataServices
 {
     public class QuotesService : IQuotesService
     {
-        private readonly IRepository<Quotes> quotesRepository;
+        private readonly IRepository<Quote> quotesRepository;
 
-        public QuotesService(IRepository<Quotes> quotesRepository)
+        public QuotesService(IRepository<Quote> quotesRepository)
         {
             this.quotesRepository = quotesRepository;
         }
 
         public async Task<int> CreateAsync(string content,int artistId)
         {
-            var quote = new Quotes
+            var quote = new Quote
             {
                 Content = content,
                 ArtistId = artistId

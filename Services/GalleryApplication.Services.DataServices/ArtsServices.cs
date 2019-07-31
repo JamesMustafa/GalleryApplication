@@ -19,10 +19,10 @@ namespace GalleryApplication.Services.DataServices
             this.artsRepository = artsRepository;
         }
 
-        public async Task<Guid> CreateAsync(Arts arts,
+        public async Task<Guid> CreateAsync(Art arts,
             DateTime uploadedOn,string extension)
         {
-            var art = new Arts
+            var art = new Art
             {
                 Title = arts.Title,
                 Description = arts.Description,

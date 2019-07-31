@@ -3,7 +3,7 @@ using GalleryApplication.Data.Common;
 
 namespace GalleryApplication.Data.Models
 {
-    public class Arts : BaseModel<Guid>
+    public class Art  : BaseModel<Guid>
     {
         public string Title { get; set; }
         public string Description { get; set; }

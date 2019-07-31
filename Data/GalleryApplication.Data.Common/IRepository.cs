@@ -9,7 +9,8 @@ namespace GalleryApplication.Data.Common
         where TEntity : class
     { 
         Task<TEntity> GetByIdAsync<T>(T id);
-        IEnumerable<TEntity> All();
+        IQueryable<TEntity> All();
+        IEnumerable<TEntity> AllEnum();
 
         Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);

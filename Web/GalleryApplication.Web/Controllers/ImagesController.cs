@@ -47,7 +47,7 @@ namespace GalleryApplication.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("Title,Description,UploadedOn,CategoryId,ArtistId")] Arts arts, IFormFile file)
+            [Bind("Title,Description,UploadedOn,CategoryId,ArtistId")] Art arts, IFormFile file)
         {
             if(ModelState.IsValid)
             {

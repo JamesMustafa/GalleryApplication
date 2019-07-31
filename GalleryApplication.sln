@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryApplication.Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryApplication.Services.Models", "Services\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj", "{75C54019-7F27-4240-AEFF-B6547B0A1A16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GalleryApplication.Services.Mapping", "Services\GalleryApplication.Services.Mapping\GalleryApplication.Services.Mapping.csproj", "{5A7219E7-6D83-46E9-A793-1C7ABD569C6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{75C54019-7F27-4240-AEFF-B6547B0A1A16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75C54019-7F27-4240-AEFF-B6547B0A1A16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75C54019-7F27-4240-AEFF-B6547B0A1A16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7219E7-6D83-46E9-A793-1C7ABD569C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7219E7-6D83-46E9-A793-1C7ABD569C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7219E7-6D83-46E9-A793-1C7ABD569C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7219E7-6D83-46E9-A793-1C7ABD569C6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{642E8410-5E9E-4D4C-80FC-00741E7F4E43} = {6EFA1B64-0FC9-4DB2-A534-28A52D863AFA}
@@ -73,5 +79,6 @@ Global
 		{8F6EB42C-FC29-4331-8C32-160B4F49302B} = {343BC967-8CCA-4D0A-AE25-F3310BE16296}
 		{A4DD47B6-9583-4B6B-B10A-98FB4B87FBAB} = {8626C0CE-B670-4320-9CD4-23A6DB79EDC0}
 		{75C54019-7F27-4240-AEFF-B6547B0A1A16} = {8626C0CE-B670-4320-9CD4-23A6DB79EDC0}
+		{5A7219E7-6D83-46E9-A793-1C7ABD569C6A} = {8626C0CE-B670-4320-9CD4-23A6DB79EDC0}
 	EndGlobalSection
 EndGlobal

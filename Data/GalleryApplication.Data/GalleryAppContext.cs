@@ -18,8 +18,8 @@ namespace GalleryApplication.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Artist> Artists { get; set; }
-        public DbSet<Arts> Arts { get; set; }
-        public DbSet<Quotes> Quotes { get; set; }
+        public DbSet<Art> Arts { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

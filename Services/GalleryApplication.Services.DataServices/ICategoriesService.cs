@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalleryApplication.Services.Models;
-using GalleryApplication.Services.Models.Category;
+using GalleryApplication.Services.Models.Categories;
 
 namespace GalleryApplication.Services.DataServices
 {

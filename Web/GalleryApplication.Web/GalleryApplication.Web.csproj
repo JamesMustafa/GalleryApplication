@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\GalleryApplication.Services.DataServices\GalleryApplication.Services.DataServices.csproj" />
     <ProjectReference Include="..\..\Services\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj" />
+    <ProjectReference Include="..\..\Services\GalleryApplication.Services.Mapping\GalleryApplication.Services.Mapping.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Areas\Identity\IdentityHostingStartup.cs" />

@@ -1,7 +1,10 @@
 ﻿using System;
+using GalleryApplication.Data.Models;
+using GalleryApplication.Services.Mapping;
+
 namespace GalleryApplication.Services.Models.Arts
 {
-    public class ArtDetailsViewModel
+    public class ArtDetailsViewModel : IMapFrom<Art>
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

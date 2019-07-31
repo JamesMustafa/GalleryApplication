@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using GalleryApplication.Data.Models;
+using GalleryApplication.Services.Mapping;
 using GalleryApplication.Services.Models.Home;
 using GalleryApplication.Services.Models.Quotes;
 
-namespace GalleryApplication.Services.Models.Artist
+namespace GalleryApplication.Services.Models.Artists
 {
-    public class ArtistDetailsViewModel
+    public class ArtistDetailsViewModel : IMapFrom<Artist>
     {
         public string Name { get; set; }
         public string ShortBiography { get; set; }

@@ -5,8 +5,8 @@ using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
 {
-    public interface IQuotesRepository : IRepository<Quotes>
+    public interface IQuotesRepository : IRepository<Quote>
     {
-        IEnumerable<Quotes> GetQuotesByArtistId(int id);
+        IEnumerable<Quote> GetQuotesByArtistId(int id);
     }
 }

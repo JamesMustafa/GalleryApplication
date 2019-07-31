@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalleryApplication.Services.Models;
-using GalleryApplication.Services.Models.Artist;
+using GalleryApplication.Services.Models.Artists;
 
 namespace GalleryApplication.Services.DataServices
 {
