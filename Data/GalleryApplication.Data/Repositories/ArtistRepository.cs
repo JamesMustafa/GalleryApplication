@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Linq;
 using System.Threading.Tasks;
 using GalleryApplication.Data.Models;
@@ -22,5 +22,6 @@ namespace GalleryApplication.Data.Repositories
         {
             return this.All().Any(x => x.Id == artistId);
         }
+
     }
 }

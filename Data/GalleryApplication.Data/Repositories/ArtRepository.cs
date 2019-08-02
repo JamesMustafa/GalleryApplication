@@ -22,29 +22,27 @@ namespace GalleryApplication.Data.Repositories
 
         public async Task<IEnumerable<Art>> GetArtsByArtistIdAsync(int artistId)
         {
-            var arts = this.All()
-                .Where(x => x.ArtistId == artistId)
-                .ToList();
+            var arts = this.AllEnum()
+                .Where(x => x.ArtistId == artistId);
 
-            return await Task.FromResult<IEnumerable<Art>>(arts);
+            return await Task.FromResult(arts);
         }
 
         public async Task<IEnumerable<Art>> GetArtsByCategoryIdAsync(int categoryId)
         {
-            var arts = this.All()
-                .Where(x => x.CategoryId == categoryId)
-                .ToList();
+            var arts = this.AllEnum()
+                .Where(x => x.CategoryId == categoryId);
 
-            return await Task.FromResult<IEnumerable<Art>>(arts);
+            return await Task.FromResult(arts);
         }
 
         public async Task<IEnumerable<Art>> GetRandomArtsAsync(int count)
         {
-            var arts = this.All()
+            var arts = this.AllEnum()
                 .OrderBy(x => Guid.NewGuid())
-                .Take(count).ToList();
+                .Take(count);
 
-            return await Task.FromResult<IEnumerable<Art>>(arts);
+            return await Task.FromResult(arts);
         }
     }
 }

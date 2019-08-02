@@ -82,7 +82,7 @@ namespace GalleryApplication.Web.Controllers
         {
             var art = await this.artsService.GetArtByIdAsync(Id);
 
-            return View(art);
+            return this.View(art);
         }
     }
 }

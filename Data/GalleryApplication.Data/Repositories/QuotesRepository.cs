@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
@@ -12,13 +13,12 @@ namespace GalleryApplication.Data.Repositories
         {
         }
 
-        public IEnumerable<Quote> GetQuotesByArtistId(int id)
+        public async Task<IEnumerable<Quote>> GetQuotesByArtistIdAsync(int artistId)
         {
-            var quotes = this.All()
-                .Where(x => x.ArtistId == id)
-                .ToList();
+            var quotes = this.AllEnum()
+                .Where(x => x.ArtistId == artistId);
 
-            return quotes;
+            return await Task.FromResult(quotes);
         }
     }
 }

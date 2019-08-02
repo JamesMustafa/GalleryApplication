@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GalleryApplication.Data.Common;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GalleryApplication.Data
 {
@@ -47,9 +48,15 @@ namespace GalleryApplication.Data
         {
             return this.context.Set<TEntity>();
         }
+
         public IEnumerable<TEntity> AllEnum()
         {
-            return this.context.Set<TEntity>().ToList();
+            return this.context.Set<TEntity>().AsEnumerable();
+        }
+
+        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> where)
+        {
+            return this.context.Set<TEntity>().AsQueryable().Where(where);
         }
     }
 }

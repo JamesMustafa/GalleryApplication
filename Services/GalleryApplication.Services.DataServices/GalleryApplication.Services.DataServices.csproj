@@ -11,4 +11,5 @@
     <ProjectReference Include="..\..\Data\GalleryApplication.Data\GalleryApplication.Data.csproj" />
     <ProjectReference Include="..\GalleryApplication.Services.Mapping\GalleryApplication.Services.Mapping.csproj" />
   </ItemGroup>
+
 </Project>

@@ -12,7 +12,6 @@
     <Folder Include="Categories\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GalleryApplication.Services.Mapping\GalleryApplication.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
   </ItemGroup>
 </Project>

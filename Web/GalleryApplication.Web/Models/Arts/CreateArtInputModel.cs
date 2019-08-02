@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using GalleryApplication.Data.Models;
-using GalleryApplication.Services.Mapping;
 
 namespace GalleryApplication.Web.Models.Arts
 {
-    public class CreateArtInputModel : IMapFrom<Art>
+    public class CreateArtInputModel
     {
         [Required]
         [MaxLength(50)]

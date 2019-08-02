@@ -24,6 +24,8 @@ using GalleryApplication.Data.Repositories;
 using GalleryApplication.Services.Mapping;
 using GalleryApplication.Services.Models.Home;
 using GalleryApplication.Web.Models.Arts;
+using GalleryApplication.Services.Models.Arts;
+using AutoMapper;
 
 namespace GalleryApplication.Web
 {
@@ -39,11 +41,11 @@ namespace GalleryApplication.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            AutoMapperConfig.RegisterMappings(
-                typeof(IndexViewModel).Assembly,
-                typeof(CreateArtInputModel).Assembly
-                );
+            //Wont Use AutoMapper
+            //services.AddAutoMapper(typeof(IndexViewModel).Assembly,
+            //    typeof(CreateArtInputModel).Assembly,
+            //    typeof(ArtDetailsViewModel).Assembly
+            //    );
 
             services.Configure<CookiePolicyOptions>(options =>
             {

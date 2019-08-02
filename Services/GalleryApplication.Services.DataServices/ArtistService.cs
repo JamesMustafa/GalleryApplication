@@ -29,7 +29,7 @@ namespace GalleryApplication.Services.DataServices
 
         public IEnumerable<IdAndNameViewModel> GetAll() //should make async too
         {
-            var artists = this.artistRepository.All()
+            var artists = this.artistRepository.AllEnum()
                 .OrderBy(x => x.Name)
                 .Select(x => new IdAndNameViewModel
                 {
@@ -43,25 +43,26 @@ namespace GalleryApplication.Services.DataServices
         public async Task<ArtistDetailsViewModel> GetArtistByIdAsync(int id)
         {
             var arts = await this.artsRepository.GetArtsByArtistIdAsync(id);
+            var quotes = await this.quotesRepository.GetQuotesByArtistIdAsync(id);
+            var artist = await this.artistRepository.GetArtistByIdAsync(id);
 
-            var artistArts = arts.Select(x => new IndexArtsViewModel
+            var artistArts = arts.Select(
+                x => new IndexArtsViewModel
             {
                 Id = x.Id,
                 Path = x.Path,
                 Title = x.Title,
                 CategoryName = x.Category.Name
 
-            }).ToList();
+            });
 
-            var quotes = this.quotesRepository.GetQuotesByArtistId(id);
-            var artistQuotes = quotes.Select(x => new ArtistQuotesViewModel
+            var artistQuotes = quotes.Select(
+                x => new ArtistQuotesViewModel
             {
                 Id = x.Id,
                 Content = x.Content,
                 ArtistName = x.Artist.Name
-            }).ToList();
-
-            var artist = await this.artistRepository.GetArtistByIdAsync(id);
+            });
 
             var details = new ArtistDetailsViewModel
             {
@@ -71,7 +72,7 @@ namespace GalleryApplication.Services.DataServices
                 Quotes = artistQuotes
             };
 
-            return details;
+            return await Task.FromResult(details);
         }
 
         public bool IsArtistIdValid(int artistId)

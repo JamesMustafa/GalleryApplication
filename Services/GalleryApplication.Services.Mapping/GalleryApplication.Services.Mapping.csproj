@@ -7,4 +7,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
+    <ProjectReference Include="..\GalleryApplication.Services.Models\GalleryApplication.Services.Models.csproj" />
+  </ItemGroup>
 </Project>

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GalleryApplication.Data.Common;
 using GalleryApplication.Data.Models;
 using GalleryApplication.Data.Repositories;
+using GalleryApplication.Services.Mapping;
 using GalleryApplication.Services.Models.Arts;
 using GalleryApplication.Services.Models.Home;
 
@@ -13,10 +15,16 @@ namespace GalleryApplication.Services.DataServices
     public class ArtsServices : IArtsService
     {
         private readonly IArtRepository artsRepository;
+        private readonly IArtistRepository artistRepository;
+        private readonly ICategoryRepository categoriesRepository;
 
-        public ArtsServices(IArtRepository artsRepository)
+        public ArtsServices(IArtRepository artsRepository,
+            IArtistRepository artistRepository,
+            ICategoryRepository categoriesRepository)
         {
             this.artsRepository = artsRepository;
+            this.artistRepository = artistRepository;
+            this.categoriesRepository = categoriesRepository;
         }
 
         public async Task<Guid> CreateAsync(Art arts,
@@ -40,21 +48,25 @@ namespace GalleryApplication.Services.DataServices
         public async Task<ArtDetailsViewModel> GetArtByIdAsync(Guid id)
         {
             var art = await this.artsRepository.GetArtByIdAsync(id);
+            var category = await this.categoriesRepository.GetByIdAsync(art.CategoryId);
+            var artist = await this.artistRepository.GetByIdAsync(art.ArtistId);
+            //example of mapping with automapper.
+            //var details = Mapper.Map<Art, ArtDetailsViewModel>(art);
 
-            var details = new ArtDetailsViewModel
+            var details = new ArtDetailsViewModel()
             {
                 Id = art.Id,
                 Title = art.Title,
                 Path = art.Path,
                 Description = art.Description,
-                CategoryName = art.Category.Name,
-                CategoryId = art.Category.Id,
-                ArtistName = art.Artist.Name,
-                ArtistId = art.Artist.Id,
+                CategoryName = category.Name,
+                CategoryId = art.CategoryId,
+                ArtistName = artist.Name,
+                ArtistId = art.ArtistId,
                 UploadedOn = art.UploadedOn
-            };
+            }; 
 
-            return details;
+            return await Task.FromResult(details);
         }
 
         public int GetCount()
