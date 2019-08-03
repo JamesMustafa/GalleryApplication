@@ -1,23 +1,66 @@
-﻿@model GalleryApplication.Services.Models.Home.HomeContactViewModel
+﻿@using GalleryApplication.Services.Models.Home
+@model GalleryApplication.Web.Models.Contact.IndexAnswerInputModel
 @{
     ViewData["Title"] = "Contact";
+    var allMessages = this.ViewData["Messages"] as IEnumerable<IndexMessagesViewModel>;
 }
 <h1>Contact</h1>
 
 <h4>All Messages</h4>
 <hr />
-@foreach(var message in Model.Messages)
+@foreach (var message in allMessages)
 {
-<div class="card my-4">
-    <h5 class="card-header">@message.Name</h5>
-    <div class="card-body">
-        <div class="row">
-            @message.Message
+    <div class="card my-4">
+        <h5 class="card-header">@message.Name</h5>
+        <div class="card-body">
+            <div class="row">
+                @message.Message
+            </div>
+        </div>
+        <div class="card-footer">
+            @if(message.IsAnswered == true)
+            {
+            <a class="btn btn-secondary disabled">Answer</a>
+            }
+            else
+            {
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@message.Email">Answer</button>
+            }
+            <a class="btn btn-primary" asp-action="DeleteMessage" asp-controller="Home" asp-route-id="@message.Id">Delete</a>
         </div>
     </div>
-    <div class="card-footer">
-        <a class="btn btn-primary">Answer</a>
-        <a class="btn btn-primary" asp-action="DeleteMessage" asp-controller="Home" asp-route-id="@message.Id">Delete</a>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="AnswerMessage" asp-controller="Home" asp-route-id="@message.Id" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="col-form-label">E-mail:</label>
+                            <input asp-for="Email" type="text" class="form-control" id="recipient-name">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Answer" class="control-label"></label>
+                            <textarea asp-for="Answer" class="form-control" id="message-text" rows="6"></textarea>
+                            <span asp-validation-for="Answer" class="text-danger"></span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Send message">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

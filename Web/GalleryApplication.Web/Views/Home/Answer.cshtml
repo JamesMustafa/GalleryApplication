@@ -1,0 +1,35 @@
+﻿@model GalleryApplication.Web.Models.Contact.IndexAnswerInputModel
+@if (Model.Answer == null)
+{
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel">New message</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="AnswerMessage" asp-controller="Home" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-form-label">E-mail:</label>
+                        <input asp-for="Email" type="text" class="form-control" id="recipient-name">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Answer" class="control-label"></label>
+                        <textarea asp-for="Answer" class="form-control" id="message-text" rows="6"></textarea>
+                        <span asp-validation-for="Answer" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Send message">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+}

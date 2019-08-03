@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using GalleryApplication.Data.Models;
 using GalleryApplication.Services.DataServices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using GalleryApplication.Web.Models.Contact;
 
 namespace GalleryApplication.Web.Controllers
 {
@@ -53,14 +54,24 @@ namespace GalleryApplication.Web.Controllers
         [Authorize]
         public IActionResult Contact()
         {
-            var allMessages = this.contactService.GetAll();
-            return View(allMessages);
+            this.ViewData["Messages"] = this.contactService.GetAll();
+
+            return View();
         }
 
-        [Route("/Home/DeleteMessage/{id:int}")]
+        [Route("/Home/Message/Delete/{id:int}")]
         public async Task<IActionResult> DeleteMessage(int id)
         {
             await this.contactService.DeleteContactByIdAsync(id);
+
+            return this.RedirectToAction("Contact", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AnswerMessage(
+            [Bind("Id,Email,Answer")] IndexAnswerInputModel inputModel)
+        {
+            await this.contactService.AnswerAsync(inputModel.Id,inputModel.Email,inputModel.Answer);
 
             return this.RedirectToAction("Contact", "Home");
         }

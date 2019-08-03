@@ -8,9 +8,10 @@ namespace GalleryApplication.Services.DataServices.Interfaces
 {
     public interface IContactService
     {
-        HomeContactViewModel GetAll();
+        IEnumerable<IndexMessagesViewModel> GetAll();
         Task<Contact> CreateAsync(Contact contact);
         Task DeleteContactByIdAsync(int contactId);
-        //Task<Contact> AnswerAsync(Contact contact);
+        Task<Contact> GetContactByIdAsync(int contactId);
+        Task AnswerAsync(int Id, string Email, string Answer);
     }
 }

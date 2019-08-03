@@ -22,12 +22,17 @@ namespace GalleryApplication.Services.DataServices
             this.emailSender = emailSender;
         }
 
-      /*  public async Task<Contact> AnswerAsync(Contact contact)
+        public async Task AnswerAsync(int Id, string Email, string Answer)
         {
+            var oldContact = await this.contactRepository.GetContactByIdAsync(Id);
+            oldContact.IsAnswered = true;
+            oldContact.AnsweredOn = DateTime.UtcNow;
+            oldContact.Answer = Answer;
+            await this.contactRepository.UpdateAsync(oldContact);
 
-            await emailSender.SendEmailAsync(contact.Email, "Answer of your message",
-                        $"");
-        } */
+            await emailSender.SendEmailAsync(Email, "Re: Thank you for contacting us !",
+                        $"{Answer}");
+        } 
 
         public async Task<Contact> CreateAsync(Contact contact)
         {
@@ -47,7 +52,7 @@ namespace GalleryApplication.Services.DataServices
             return await Task.FromResult(message);
         }
 
-        public HomeContactViewModel GetAll()
+        public IEnumerable<IndexMessagesViewModel> GetAll()
         {
             var messages = this.contactRepository.AllEnum()
                 .OrderBy(x => x.CreatedOn)
@@ -55,17 +60,24 @@ namespace GalleryApplication.Services.DataServices
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    Email = x.Email,
                     Message = x.Message,
                     IsAnswered = x.IsAnswered
                 }); //should put something in this
 
-            return new HomeContactViewModel { Messages = messages};
+            return messages;
         }
 
         public async Task DeleteContactByIdAsync(int contactId)
         {
             var contact = await this.contactRepository.GetContactByIdAsync(contactId);
             await this.contactRepository.DeleteAsync(contact);
+        }
+
+        public async Task<Contact> GetContactByIdAsync(int contactId)
+        {
+            var contact = await this.contactRepository.GetContactByIdAsync(contactId);
+            return await Task.FromResult(contact);
         }
     }
 }
