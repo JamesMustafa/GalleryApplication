@@ -6,7 +6,7 @@ using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
 {
-    public interface IArtRepository : IRepository<Art>
+    public interface IArtRepository : IDeletableRepository<Art>
     {
         Task<IEnumerable<Art>> GetRandomArtsAsync(int count);
 

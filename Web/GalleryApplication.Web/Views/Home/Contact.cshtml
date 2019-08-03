@@ -1,0 +1,23 @@
+﻿@model GalleryApplication.Services.Models.Home.HomeContactViewModel
+@{
+    ViewData["Title"] = "Contact";
+}
+<h1>Contact</h1>
+
+<h4>All Messages</h4>
+<hr />
+@foreach(var message in Model.Messages)
+{
+<div class="card my-4">
+    <h5 class="card-header">@message.Name</h5>
+    <div class="card-body">
+        <div class="row">
+            @message.Message
+        </div>
+    </div>
+    <div class="card-footer">
+        <a class="btn btn-primary">Answer</a>
+        <a class="btn btn-primary" asp-action="DeleteMessage" asp-controller="Home" asp-route-id="@message.Id">Delete</a>
+    </div>
+</div>
+}

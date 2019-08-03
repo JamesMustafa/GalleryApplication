@@ -6,7 +6,7 @@ using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
 {
-    public class QuotesRepository : DbRepository<Quote>, IQuotesRepository
+    public class QuotesRepository : DbDeletableRepository<Quote>, IQuotesRepository
     {
         public QuotesRepository(GalleryAppContext context)
             : base(context)

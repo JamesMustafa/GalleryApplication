@@ -3,11 +3,10 @@ using GalleryApplication.Data.Common;
 
 namespace GalleryApplication.Data.Models
 {
-    public class Art  : BaseModel<Guid>
+    public class Art  : BaseDeletableModel<Guid>
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime UploadedOn { get; set; }
         public string Path { get; set; }
 
         public int CategoryId { get; set; }

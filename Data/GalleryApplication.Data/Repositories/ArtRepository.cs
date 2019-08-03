@@ -6,7 +6,7 @@ using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
 {
-    public class ArtRepository : DbRepository<Art>, IArtRepository
+    public class ArtRepository : DbDeletableRepository<Art>, IArtRepository
     {
         public ArtRepository(GalleryAppContext context)
             : base(context)

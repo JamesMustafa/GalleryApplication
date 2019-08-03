@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GalleryApplication.Data.Common
 {
     public interface IRepository<TEntity>
-        where TEntity : class
+        where TEntity : class, ICreatable
     { 
         Task<TEntity> GetByIdAsync<T>(T id);
         IQueryable<TEntity> All();
@@ -15,7 +15,7 @@ namespace GalleryApplication.Data.Common
 
         Task<TEntity> AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        Task HardDeleteAsync(TEntity entity);
 
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> where);
 

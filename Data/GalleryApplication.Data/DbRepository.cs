@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace GalleryApplication.Data
 {
     public class DbRepository<TEntity> : IRepository<TEntity>
-        where TEntity : class
+        where TEntity : class,ICreatable
     {
         private readonly GalleryAppContext context;
 
@@ -21,6 +21,7 @@ namespace GalleryApplication.Data
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
+            entity.CreatedOn = DateTime.UtcNow;
             await this.context.Set<TEntity>().AddAsync(entity);
             await context.SaveChangesAsync();
 
@@ -38,7 +39,7 @@ namespace GalleryApplication.Data
             await context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task HardDeleteAsync(TEntity entity)
         {
             this.context.Set<TEntity>().Remove(entity);
             await context.SaveChangesAsync();
@@ -49,7 +50,7 @@ namespace GalleryApplication.Data
             return this.context.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> AllEnum()
+        public virtual IEnumerable<TEntity> AllEnum()
         {
             return this.context.Set<TEntity>().AsEnumerable();
         }

@@ -6,7 +6,7 @@ using GalleryApplication.Data.Models;
 
 namespace GalleryApplication.Data.Repositories
 {
-    public interface IQuotesRepository : IRepository<Quote>
+    public interface IQuotesRepository : IDeletableRepository<Quote>
     {
         Task<IEnumerable<Quote>> GetQuotesByArtistIdAsync(int artistId);
     }

@@ -34,7 +34,6 @@ namespace GalleryApplication.Services.DataServices
             {
                 Title = arts.Title,
                 Description = arts.Description,
-                UploadedOn = uploadedOn,
                 CategoryId = arts.CategoryId,
                 ArtistId = arts.ArtistId,
                 Path = extension
@@ -62,8 +61,7 @@ namespace GalleryApplication.Services.DataServices
                 CategoryName = category.Name,
                 CategoryId = art.CategoryId,
                 ArtistName = artist.Name,
-                ArtistId = art.ArtistId,
-                UploadedOn = art.UploadedOn
+                ArtistId = art.ArtistId
             }; 
 
             return await Task.FromResult(details);

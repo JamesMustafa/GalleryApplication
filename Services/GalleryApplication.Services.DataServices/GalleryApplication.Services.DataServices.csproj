@@ -10,6 +10,10 @@
     <ProjectReference Include="..\..\Data\GalleryApplication.Data.Models\GalleryApplication.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\GalleryApplication.Data\GalleryApplication.Data.csproj" />
     <ProjectReference Include="..\GalleryApplication.Services.Mapping\GalleryApplication.Services.Mapping.csproj" />
+    <ProjectReference Include="..\GalleryApplication.Services.Messaging\GalleryApplication.Services.Messaging.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
 </Project>

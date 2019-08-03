@@ -26,6 +26,7 @@ using GalleryApplication.Services.Models.Home;
 using GalleryApplication.Web.Models.Arts;
 using GalleryApplication.Services.Models.Arts;
 using AutoMapper;
+using GalleryApplication.Services.DataServices.Interfaces;
 
 namespace GalleryApplication.Web
 {
@@ -91,7 +92,7 @@ namespace GalleryApplication.Web
             services.AddScoped<IArtsService, ArtsServices>();
             services.AddScoped<IArtistService, ArtistService>();
             services.AddScoped<IQuotesService, QuotesService>();
-
+            services.AddScoped<IContactService, ContactService>();
 
             services.AddScoped<IArtRepository, ArtRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

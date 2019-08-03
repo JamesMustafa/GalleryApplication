@@ -3,14 +3,16 @@ using System;
 using GalleryApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GalleryApplication.Data.Migrations
 {
     [DbContext(typeof(GalleryAppContext))]
-    partial class GalleryAppContextModelSnapshot : ModelSnapshot
+    [Migration("20190802220602_DeletableAdded")]
+    partial class DeletableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
