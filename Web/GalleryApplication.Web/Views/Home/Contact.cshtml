@@ -10,6 +10,8 @@
 <hr />
 @foreach (var message in allMessages)
 {
+    var divId = "exampleModal" + message.Id.ToString();
+    var target = "#exampleModal" + message.Id.ToString();
     <div class="card my-4">
         <h5 class="card-header">@message.Name</h5>
         <div class="card-body">
@@ -18,22 +20,22 @@
             </div>
         </div>
         <div class="card-footer">
-            @if(message.IsAnswered == true)
+            @if (message.IsAnswered == true)
             {
             <a class="btn btn-secondary disabled">Answer</a>
             }
             else
             {
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@message.Email">Answer</button>
+            <a class="btn btn-primary" data-toggle="modal" data-target="@target" data-whatever="@message.Email" asp-route-id="@message.Id">Answer</a>
             }
             <a class="btn btn-primary" asp-action="DeleteMessage" asp-controller="Home" asp-route-id="@message.Id">Delete</a>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="@divId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel">New message</h6>
+                    <h6 class="modal-title" id="exampleModalLabel">New message to @message.Email.</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -43,7 +45,7 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="Email" class="col-form-label">E-mail:</label>
-                            <input asp-for="Email" type="text" class="form-control" id="recipient-name">
+                            <input asp-for="Email" type="text" class="form-control" value="@message.Email">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -60,7 +62,4 @@
             </div>
         </div>
     </div>
-}
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

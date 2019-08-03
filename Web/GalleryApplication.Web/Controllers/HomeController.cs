@@ -68,10 +68,11 @@ namespace GalleryApplication.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AnswerMessage(
-            [Bind("Id,Email,Answer")] IndexAnswerInputModel inputModel)
+        [Route("/Home/AnswerMessage/{id:int}")]
+        public async Task<IActionResult> AnswerMessage(int id,
+            [Bind("Email,Answer")] IndexAnswerInputModel inputModel)
         {
-            await this.contactService.AnswerAsync(inputModel.Id,inputModel.Email,inputModel.Answer);
+            await this.contactService.AnswerAsync(id,inputModel.Email,inputModel.Answer);
 
             return this.RedirectToAction("Contact", "Home");
         }

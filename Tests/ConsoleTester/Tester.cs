@@ -35,8 +35,8 @@ namespace ConsoleTester
         {
             //var dbContext = serviceProvider.GetService<TestMvcDbContext>();
             // TODO : Writing tests here
-            var pablo = "Pablo Picasso";
-            Console.WriteLine(pablo.Replace(" ",string.Empty).ToLower());
+            var a = Environment.GetEnvironmentVariable("testKey2");
+            Console.WriteLine(a);
         }
 
         private static void ConfigureServices(ServiceCollection serviceCollection)

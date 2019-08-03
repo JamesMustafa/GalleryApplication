@@ -12,10 +12,6 @@ namespace ProjectMVC.Services.Messaging
     public class SendGridNewSender : IEmailSender
     {
 
-        public SendGridNewSender()
-        { 
-        }
-
         public Task SendEmailAsync(string email, string subject, string message)
         {
             return Execute(subject, message, email);
