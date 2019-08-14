@@ -27,6 +27,8 @@ using GalleryApplication.Web.Models.Arts;
 using GalleryApplication.Services.Models.Arts;
 using AutoMapper;
 using GalleryApplication.Services.DataServices.Interfaces;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace GalleryApplication.Web
 {
@@ -60,13 +62,24 @@ namespace GalleryApplication.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options =>
             {
+                //Password settings.
                 options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
             })
-                .AddRoles<IdentityRole>() //
+                //.AddRoles<IdentityRole>() //
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<GalleryAppContext>();
 

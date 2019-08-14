@@ -39,6 +39,12 @@ namespace GalleryApplication.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            //Check if there is user with the same Username or Email and show
+            //ErrorMessage if there is.
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -66,7 +72,7 @@ namespace GalleryApplication.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.Username, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

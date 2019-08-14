@@ -12,6 +12,7 @@ using GalleryApplication.Data.Models;
 using GalleryApplication.Services.DataServices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using GalleryApplication.Web.Models.Contact;
+using Microsoft.Extensions.Localization;
 
 namespace GalleryApplication.Web.Controllers
 {
