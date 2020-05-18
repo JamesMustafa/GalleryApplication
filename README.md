@@ -2,7 +2,7 @@
 
 ## Getting Started
 GalleryApplication is a .NET Core 2.2 Web MVC project. It is based on the idea of collaboration of
-all the worlds best artist in one place and creating an online gallery where you can see their arts, feel their lifestyle, go back
+all the world's best artists in one place and creating an online gallery where you can see their arts, read their quotes, feel their lifestyle, go back
 to the times they were living and most of all learn new things about the cultures in the past.
 
 ## Built With
