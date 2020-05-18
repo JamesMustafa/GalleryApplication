@@ -20,6 +20,10 @@ to the times they were living and most of all learn new things about the culture
   
   * [AutoMapper](https://automapper.org) - Auto Mapper for mappings
   
+  * [Razor View Engine](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-2.2) - View Engine
+  
+  * [HTML](https://en.wikipedia.org/wiki/HTML5), [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets), [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+  
 * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/get-started/?tabs=netcore-cli) - object-database mapper
 
   * [MySQL](https://www.mysql.com) RDBMS
