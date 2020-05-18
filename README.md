@@ -30,7 +30,7 @@ to the times they were living and most of all learn new things about the culture
   
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/JamesMustafa/GalleryApplication/blob/master/LICENSE) file for details
 
 ## Authors
 
